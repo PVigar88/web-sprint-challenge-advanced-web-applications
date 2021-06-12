@@ -23,10 +23,21 @@ const BubblePage = () => {
     setEditing(value);
   };
 
+  const mapColorEdit = (changedColor) => {
+    colors.map((color) => {
+      if (Number(color.id) === Number(changedColor.id)) {
+        return changedColor;
+      } else {
+        return color;
+      }
+    });
+  };
+
   const saveEdit = (editColor) => {
     editColorService(editColor)
       .then((res) => {
-        setColors(res.data);
+        console.log(res.data);
+        setColors(mapColorEdit(res.data));
       })
       .catch((err) => {
         console.log(`There is an error with edit: ${err}`);
