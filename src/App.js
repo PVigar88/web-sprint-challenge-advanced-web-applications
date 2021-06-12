@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Login from "./components/Login";
 import "./styles.scss";
@@ -7,12 +7,26 @@ import { PrivateRoute } from "./components/PrivateRoute";
 import BubblePage from "./components/BubblePage";
 
 function App() {
+  const logout = () => {
+    // There is no logout endpoint handler on the mockserver
+    // included code as though there were
+    // axiosWithAuth()
+    //   .post("/logout")
+    //   .then((res) => {
+    localStorage.removeItem("token");
+    window.location.href = "/";
+    // })
+    // .catch((err) => {
+    //   console.log("There is an error on Logout ", err);
+    // });
+  };
+
   return (
     <Router>
       <div className="App">
         <header>
           Color Picker Sprint Challenge
-          <a data-testid="logoutButton" href="#">
+          <a data-testid="logoutButton" href="/" onClick={logout}>
             logout
           </a>
         </header>

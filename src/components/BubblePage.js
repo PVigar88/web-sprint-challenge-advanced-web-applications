@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import Bubbles from "./Bubbles";
 import ColorList from "./ColorList";
 
-// import { editColorService, deleteColorService } from "../services/colorService";
+import { editColorService, deleteColorService } from "../services/colorService";
+
 import fetchColorService from "../services/fetchColorService";
 
 const BubblePage = () => {
@@ -16,15 +17,31 @@ const BubblePage = () => {
         setColors(res.data);
       })
       .catch((err) => console.log(err));
-  }, [fetchColorService]);
+  }, []);
 
   const toggleEdit = (value) => {
     setEditing(value);
   };
 
-  const saveEdit = (editColor) => {};
+  const saveEdit = (editColor) => {
+    editColorService(editColor)
+      .then((res) => {
+        setColors(res.data);
+      })
+      .catch((err) => {
+        console.log(`There is an error with edit: ${err}`);
+      });
+  };
 
-  const deleteColor = (colorToDelete) => {};
+  const deleteColor = (colorToDelete) => {
+    deleteColorService(colorToDelete)
+      .then((res) => {
+        setColors(res.data);
+      })
+      .catch((err) => {
+        console.log(`There is an error with edit: ${err}`);
+      });
+  };
 
   return (
     <div className="container">
