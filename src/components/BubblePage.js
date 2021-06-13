@@ -5,7 +5,7 @@ import ColorList from "./ColorList";
 
 import { editColorService, deleteColorService } from "../services/colorService";
 
-import fetchColorService from "../services/fetchColorService";
+import { fetchColorService } from "../services/fetchColorService";
 
 const BubblePage = () => {
   const [colors, setColors] = useState([]);
