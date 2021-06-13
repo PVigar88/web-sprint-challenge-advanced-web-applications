@@ -24,7 +24,9 @@ const BubblePage = () => {
   };
 
   const mapColorEdit = (changedColor) => {
-    colors.map((color) => {
+    console.log("mapColorEdit begins");
+    console.log(`colors before handling change? ${colors}`);
+    return colors.map((color) => {
       if (Number(color.id) === Number(changedColor.id)) {
         return changedColor;
       } else {
@@ -38,16 +40,24 @@ const BubblePage = () => {
       .then((res) => {
         console.log(res.data);
         setColors(mapColorEdit(res.data));
+        console.log(colors);
       })
       .catch((err) => {
         console.log(`There is an error with edit: ${err}`);
       });
   };
 
+  const filterDeleteColor = (deletedColor) => {
+    return colors.filter((color) => {
+      return Number(color.id) !== Number(deletedColor);
+    });
+  };
+
   const deleteColor = (colorToDelete) => {
     deleteColorService(colorToDelete)
       .then((res) => {
-        setColors(res.data);
+        console.log(res.data);
+        setColors(filterDeleteColor(res.data));
       })
       .catch((err) => {
         console.log(`There is an error with edit: ${err}`);
